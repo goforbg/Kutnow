@@ -91,15 +91,16 @@
             android:layout_width="30dp"
             android:layout_height="35dp"
             android:layout_marginLeft="10dp"
-            android:srcCompat="@drawable/ic_trending" />
+            app:srcCompat="@drawable/ic_trending" />
 
     </LinearLayout>
 
     <androidx.recyclerview.widget.RecyclerView
         android:id="@+id/rvShoplist"
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:layout_margin="10dp" />
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:visibility="visible" />
 
 
 </LinearLayout>
