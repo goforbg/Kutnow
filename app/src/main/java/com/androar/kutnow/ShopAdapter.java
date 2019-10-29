@@ -15,11 +15,15 @@ import java.util.ArrayList;
 public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
 
     public ArrayList<Shops> shops;
+    private final Integer[] shopId;
 
-    public ShopAdapter(Context context, ArrayList<Shops> list)
+
+    public ShopAdapter(Context context, ArrayList<Shops> list, Integer[] shopId)
     {
         shops=list;
+        this.shopId=shopId;
         notifyDataSetChanged();
+
     }
 
     public class ViewHolder extends  RecyclerView.ViewHolder {
@@ -68,6 +72,9 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
         if (shops.get(position).getShopName().equals("")) {
             holder.ivPrice.setImageResource(R.drawable.ic_cheap);
         }
+
+        holder.ivPrice.setImageResource(shopId[position]);
+
 
 
     }
