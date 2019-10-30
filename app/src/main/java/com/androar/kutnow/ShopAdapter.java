@@ -39,7 +39,6 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
             ivShop = itemView.findViewById(R.id.ivShop);
             tvShopName = itemView.findViewById(R.id.tvShop);
             tvShopDesc = itemView.findViewById(R.id.tvShopDesc);
-            ivPrice = itemView.findViewById(R.id.ivPrice);
         }
     }
     @NonNull
@@ -56,7 +55,7 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
         holder.tvShopName.setText(shops.get(position).getShopName());
         holder.tvShopDesc.setText(shops.get(position).getShopDesc());
 
-
+        /*
         if (shops.get(position).getPrice().equals("cheap")) {
             holder.ivPrice.setImageResource(R.drawable.ic_cheap);
         }
@@ -73,7 +72,9 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
             holder.ivPrice.setImageResource(R.drawable.ic_cheap);
         }
 
-        holder.ivPrice.setImageResource(shopId[position]);
+         */
+
+        holder.ivShop.setImageResource(shopId[position]);
 
 
 

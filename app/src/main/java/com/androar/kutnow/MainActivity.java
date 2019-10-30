@@ -26,8 +26,14 @@ public class MainActivity extends AppCompatActivity {
         BottomNavigationView navigation = (BottomNavigationView) findViewById(R.id.navigation);
         navigation.setOnNavigationItemSelectedListener(mOnNavigationItemSelectedListener);
 
-        toolbar.setTitle("Order");
+        toolbar.setTitle("Kutnow");
         loadFragment(new Order());
+    }
+
+
+    public void setActionBarTitle(String title){
+        toolbar = getSupportActionBar();
+        toolbar.setTitle(title);
     }
 
     private BottomNavigationView.OnNavigationItemSelectedListener mOnNavigationItemSelectedListener
