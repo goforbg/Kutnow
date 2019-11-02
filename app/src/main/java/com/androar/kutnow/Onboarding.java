@@ -15,6 +15,7 @@ public class Onboarding extends AppCompatActivity {
 
     Button signin, signup;
 
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -26,16 +27,28 @@ public class Onboarding extends AppCompatActivity {
         signin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                signin.setVisibility(View.GONE);
+                signup.setVisibility(View.GONE);
                 Fragment fragment = new Signin();
-                loadFragment(fragment);
-            }
+                    // load fragment
+                    FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                    transaction.replace(R.id.frame_container2, fragment);
+                    transaction.addToBackStack(null);
+                    transaction.commit();
+                            }
         });
 
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                signin.setVisibility(View.GONE);
+                signup.setVisibility(View.GONE);
                 Fragment fragment = new Signup();
-                loadFragment(fragment);
+                // load fragment
+                FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container2, fragment);
+                transaction.addToBackStack(null);
+                transaction.commit();
             }
         });
 
@@ -44,12 +57,5 @@ public class Onboarding extends AppCompatActivity {
     }
 
 
-    private void loadFragment(Fragment fragment) {
-        // load fragment
-        FragmentTransaction transaction = getSupportFragmentManager().beginTransaction();
-        transaction.replace(R.id.frame_container, fragment);
-        transaction.addToBackStack(null);
-        transaction.commit();
-    }
 
 }
