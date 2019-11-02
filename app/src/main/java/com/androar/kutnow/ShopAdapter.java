@@ -1,13 +1,19 @@
 package com.androar.kutnow;
 
 import android.content.Context;
+import android.os.Bundle;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ImageView;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
+import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.ContextCompat;
+import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentTransaction;
 import androidx.recyclerview.widget.RecyclerView;
 
 import java.util.ArrayList;
@@ -16,14 +22,15 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
 
     public ArrayList<Shops> shops;
     private final Integer[] shopId;
+    public Context context;
 
 
     public ShopAdapter(Context context, ArrayList<Shops> list, Integer[] shopId)
     {
         shops=list;
         this.shopId=shopId;
+        this.context = context;
         notifyDataSetChanged();
-
     }
 
     public class ViewHolder extends  RecyclerView.ViewHolder {
@@ -31,7 +38,6 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
         ImageView ivShop;
         TextView tvShopName;
         TextView tvShopDesc;
-        ImageView ivPrice;
 
         public ViewHolder (@NonNull View itemView){
             super(itemView);
@@ -49,7 +55,7 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
     }
 
     @Override
-    public void onBindViewHolder(@NonNull ShopAdapter.ViewHolder holder, int position) {
+    public void onBindViewHolder(@NonNull ShopAdapter.ViewHolder holder, final int position) {
         holder.itemView.setTag(shops.get(position));
 
         holder.tvShopName.setText(shops.get(position).getShopName());
@@ -76,9 +82,30 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
 
         holder.ivShop.setImageResource(shopId[position]);
 
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment f1 = new OrderServices();
+                Bundle args1 = new Bundle();
+                args1.putString(shops.get(position).getShopName() ,"shopName");
+                f1.setArguments(args1);
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container, f1);
+                transaction.addToBackStack(null);
+                transaction.commit();
 
+                Toast.makeText(v.getContext(), "Position is" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
+
+
+    private void loadFragment(Fragment fragment) {
+        // load fragment
+    }
+
 
     @Override
     public int getItemCount() {
