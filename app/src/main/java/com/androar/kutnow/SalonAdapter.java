@@ -22,15 +22,15 @@ import java.util.ArrayList;
 
 public class SalonAdapter extends RecyclerView.Adapter <SalonAdapter.ViewHolder> {
 
-    public ArrayList<Shops> shops;
+    public ArrayList<Salons> salons;
     public Context context;
 
     private FirebaseDatabase firebaseDatabase;
 
 
-    public SalonAdapter(Context context, ArrayList<Shops> list)
+    public SalonAdapter(Context context, ArrayList<Salons> list)
     {
-        shops=list;
+        salons=list;
         this.context = context;
         notifyDataSetChanged();
     }
@@ -51,24 +51,7 @@ public class SalonAdapter extends RecyclerView.Adapter <SalonAdapter.ViewHolder>
 
     @Override
     public void onBindViewHolder(@NonNull SalonAdapter.ViewHolder holder, final int position) {
-        holder.itemView.setTag(shops.get(position));
-
-        holder.itemView.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Fragment f1 = new OrderServices();
-                Bundle args1 = new Bundle();
-                args1.putString("shopName", shops.get(position).getShopName());
-                f1.setArguments(args1);
-                AppCompatActivity activity = (AppCompatActivity) v.getContext();
-                FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
-                transaction.replace(R.id.frame_container, f1);
-                transaction.addToBackStack(null);
-                transaction.commit();
-
-                Toast.makeText(v.getContext(), "Position is" + position, Toast.LENGTH_SHORT).show();
-            }
-        });
+        holder.itemView.setTag(salons.get(position));
 
     }
 
@@ -80,6 +63,6 @@ public class SalonAdapter extends RecyclerView.Adapter <SalonAdapter.ViewHolder>
 
     @Override
     public int getItemCount() {
-        return shops.size();
+        return salons.size();
     }
 }

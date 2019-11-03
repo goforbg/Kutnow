@@ -22,15 +22,17 @@ import java.util.ArrayList;
 
 public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
 
-    public ArrayList<Salons> salons;
+    public ArrayList<Shops> shops;
+    private final Integer[] shopId;
     public Context context;
 
     private FirebaseDatabase firebaseDatabase;
 
 
-    public ShopAdapter(Context context, ArrayList<Salons> list)
+    public ShopAdapter(Context context, ArrayList<Shops> list, Integer[] shopId)
     {
-        salons=list;
+        shops=list;
+        this.shopId=shopId;
         this.context = context;
         notifyDataSetChanged();
     }
@@ -58,9 +60,48 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
 
     @Override
     public void onBindViewHolder(@NonNull ShopAdapter.ViewHolder holder, final int position) {
-        holder.itemView.setTag(salons.get(position));
+        holder.itemView.setTag(shops.get(position));
 
-        holder.tvShopName.setText(salons.get(position).getSalonName());
+        holder.tvShopName.setText(shops.get(position).getShopName());
+        holder.tvShopDesc.setText(shops.get(position).getShopDesc());
+
+        /*
+        if (shops.get(position).getPrice().equals("cheap")) {
+            holder.ivPrice.setImageResource(R.drawable.ic_cheap);
+        }
+
+        if (shops.get(position).getPrice().equals("medium")) {
+            holder.ivPrice.setImageResource(R.drawable.ic_medium);
+        }
+
+        if (shops.get(position).getPrice().equals("costly")) {
+            holder.ivPrice.setImageResource(R.drawable.ic_costly);
+        }
+
+        if (shops.get(position).getShopName().equals("")) {
+            holder.ivPrice.setImageResource(R.drawable.ic_cheap);
+        }
+
+         */
+
+        holder.ivShop.setImageResource(shopId[position]);
+
+        holder.itemView.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Fragment f1 = new OrderServices();
+                Bundle args1 = new Bundle();
+                args1.putString("shopName", shops.get(position).getShopName());
+                f1.setArguments(args1);
+                AppCompatActivity activity = (AppCompatActivity) v.getContext();
+                FragmentTransaction transaction = activity.getSupportFragmentManager().beginTransaction();
+                transaction.replace(R.id.frame_container, f1);
+                transaction.addToBackStack(null);
+                transaction.commit();
+
+                Toast.makeText(v.getContext(), "Position is" + position, Toast.LENGTH_SHORT).show();
+            }
+        });
 
     }
 
@@ -72,6 +113,6 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
 
     @Override
     public int getItemCount() {
-        return salons.size();
+        return shops.size();
     }
 }
