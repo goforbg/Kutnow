@@ -14,6 +14,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="280dp"
         android:hint="Enter your Email"
+        android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         android:ems="10"
         android:inputType="textPersonName"/>
@@ -24,6 +25,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:hint="Enter your Password"
+        android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         android:ems="10"
         android:inputType="textPassword"/>

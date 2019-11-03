@@ -1,5 +1,6 @@
 package com.androar.kutnow;
 
+import androidx.annotation.Nullable;
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 import androidx.fragment.app.FragmentTransaction;
@@ -15,6 +16,17 @@ public class Onboarding extends AppCompatActivity {
 
     Button signin, signup;
 
+    @Override
+    public void onBackPressed() {
+        super.onBackPressed();
+        signin = findViewById(R.id.btnSignIn);
+        signup = findViewById(R.id.btnSignUp);
+
+        signin.setVisibility(View.VISIBLE);
+        signup.setVisibility(View.VISIBLE);
+
+
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -23,6 +35,9 @@ public class Onboarding extends AppCompatActivity {
 
         signin = findViewById(R.id.btnSignIn);
         signup = findViewById(R.id.btnSignUp);
+
+        signin.setVisibility(View.VISIBLE);
+        signup.setVisibility(View.VISIBLE);
 
         signin.setOnClickListener(new View.OnClickListener() {
             @Override

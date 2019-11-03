@@ -61,9 +61,9 @@ public class AllShops extends Fragment {
         View rootview = inflater.inflate(R.layout.fragment_all_shops, container, false);
 
         shops = new ArrayList<Shops>();
-        shops.add(new Shops("Krazy Cuts", "Haircuts starting at Rs. 150", "cheap"));
-        shops.add(new Shops("Suriya Salon", "Haircuts starting at Rs. 120", "cheap"));
-        shops.add(new Shops("Green trends", "Haircuts starting at Rs. 280", "costly"));
+        shops.add(new Shops("KrazyCuts", "Haircuts starting at Rs. 150", "cheap"));
+        shops.add(new Shops("SuriyaSalon", "Haircuts starting at Rs. 120", "cheap"));
+        shops.add(new Shops("Greentrends", "Haircuts starting at Rs. 280", "costly"));
         shops.add(new Shops("Chillbreeze", "50% Off on your first haircut. Starting at just Rs.99*", "medium"));
 
         layoutManager = new LinearLayoutManager(getActivity());

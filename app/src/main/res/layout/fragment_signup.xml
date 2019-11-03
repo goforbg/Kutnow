@@ -15,6 +15,7 @@
         android:layout_gravity="center_horizontal"
         android:layout_marginTop="230dp"
         android:hint="Enter your name"
+        android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         android:ems="10"
         android:inputType="textPersonName"/>
@@ -25,6 +26,7 @@
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
         android:hint="Enter your Email"
+        android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         android:ems="10"
         android:inputType="textPersonName"/>
@@ -34,6 +36,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/white"
         android:hint="Enter your Phone"
         android:textColorHint="@android:color/white"
         android:ems="10"
@@ -44,6 +47,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_gravity="center_horizontal"
+        android:textColor="@android:color/white"
         android:hint="Enter your Password"
         android:textColorHint="@android:color/white"
         android:ems="10"

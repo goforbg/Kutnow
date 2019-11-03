@@ -74,9 +74,9 @@ public class Order extends Fragment {
         View rootview =inflater.inflate(R.layout.fragment_order, container, false);
 
         shops = new ArrayList<Shops>();
-        shops.add(new Shops("Krazy Cuts", "50+ positive ratings this week", "cheap"));
-        shops.add(new Shops("Suriya Salon", "More than 10 from your neighbourhood rated this well", "cheap"));
-        shops.add(new Shops("Green trends", "70+ positive ratings this week", "costly"));
+        shops.add(new Shops("KrazyCuts", "50+ positive ratings this week", "cheap"));
+        shops.add(new Shops("SuriyaSalon", "More than 10 from your neighbourhood rated this well", "cheap"));
+        shops.add(new Shops("Greentrends", "70+ positive ratings this week", "costly"));
         shops.add(new Shops("Chillbreeze", "#1 trending near you", "medium"));
 
         layoutManager = new LinearLayoutManager(getActivity());
@@ -96,8 +96,7 @@ public class Order extends Fragment {
         iv1.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(getActivity(), Onboarding.class);
-                startActivity(intent);
+
                 //fragment = new OrderServices();
                 //loadFragment(fragment);
             }

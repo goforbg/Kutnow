@@ -2,11 +2,15 @@ package com.androar.kutnow;
 
 
 import android.app.ProgressDialog;
+import android.content.Intent;
 import android.os.Bundle;
 
 import androidx.annotation.NonNull;
 import androidx.fragment.app.Fragment;
+import androidx.fragment.app.FragmentManager;
+import androidx.fragment.app.FragmentTransaction;
 
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -14,6 +18,9 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DataSnapshot;
@@ -21,6 +28,8 @@ import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import static androidx.constraintlayout.widget.Constraints.TAG;
 
 
 /**
@@ -63,35 +72,45 @@ public class Signin extends Fragment {
 
         btnSigninSubmit.setOnClickListener(new View.OnClickListener() {
             @Override
-            public void onClick(View view) {
+            public void onClick(final View view) {
 
-                final ProgressDialog mDialog = new ProgressDialog(getActivity());
-                mDialog.setMessage("Please wait!...");
-                mDialog.show();
-                table_user.addValueEventListener(new ValueEventListener() {
-                    @Override
-                    public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
-                        mDialog.dismiss();
-                        User user = dataSnapshot.child(etUsername.getText().toString()).getValue(User.class);
-                        if (user.getPassword().equals(etPassword.getText().toString())) {
+                firebaseAuth.signInWithEmailAndPassword(etUsername.getText().toString(), etPassword.getText().toString())
+                        .addOnCompleteListener(getActivity(), new OnCompleteListener<AuthResult>() {
+                            @Override
+                            public void onComplete(@NonNull Task<AuthResult> task) {
+                                if (task.isSuccessful()) {
+                                    // Sign in success, update UI with the signed-in user's information
+                                    Log.d(TAG, "signInWithEmail:success");
+                                    FirebaseUser user = firebaseAuth.getCurrentUser();
+                                    Intent intent = new Intent (getActivity(), MainActivity.class);
+                                    startActivity(intent);
+                                    FragmentTransaction transaction = getFragmentManager().beginTransaction();
+                                    transaction.addToBackStack(null);
+                                    transaction.commit();
+                                    getFragmentManager().popBackStack(null, FragmentManager.POP_BACK_STACK_INCLUSIVE);
+                                    transaction.commit();
+                                    finish();
+                                } else {
+                                    // If sign in fails, display a message to the user.
+                                    Log.w(TAG, "signInWithEmail:failure", task.getException());
+                                    Toast.makeText(getActivity(), "Authentication failed.",
+                                            Toast.LENGTH_SHORT).show();
+                                }
 
-                            Toast.makeText(getActivity(), "Successful sign in!", Toast.LENGTH_SHORT).show();
-                        }
-                        else {
-                            Toast.makeText(getActivity(), "Some error occurred!", Toast.LENGTH_SHORT).show();
-                        }
-                    }
-
-                    @Override
-                    public void onCancelled(@NonNull DatabaseError databaseError) {
-
-                    }
-                });
+                                // ...
+                            }
+                        });
             }
         });
 
         // Inflate the layout for this fragment
         return view;
     }
+
+
+    public void finish() {
+        finish();
+    }
+
 
 }
