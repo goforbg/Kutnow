@@ -24,6 +24,8 @@ import java.util.ArrayList;
 
 public class SalonAdapter extends RecyclerView.Adapter <SalonAdapter.ViewHolder> {
 
+    int cart = 0;
+
     public ArrayList<Salons> salons;
     public Context context;
 
@@ -45,7 +47,7 @@ public class SalonAdapter extends RecyclerView.Adapter <SalonAdapter.ViewHolder>
 
             tvServiceName = itemView.findViewById(R.id.tvServiceName);
             tvPrice = itemView.findViewById(R.id.tvPrice);
-            //btnAdd = itemView.findViewById(R.id.btnadd);
+            btnAdd = itemView.findViewById(R.id.btnadd);
 
         }
     }
@@ -67,7 +69,23 @@ public class SalonAdapter extends RecyclerView.Adapter <SalonAdapter.ViewHolder>
 
         holder.tvPrice.setText(salons.get(position).getPrice());
         String message = salons.get(position).getServicename();
-        Log.i("price", message);
+
+        holder.btnAdd.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if (salons.get(position).getPrice()!=null) {
+                cart += Integer.parseInt(salons.get(position).getPrice());
+                String cartvalue = String.valueOf(cart);
+                Log.d ("price of cart", cartvalue);}
+
+                else {
+                    cart += 150;
+                }
+            }
+        });
+
+        String cartvalue = String.valueOf(cart);
+        Log.d("price", cartvalue);
 
     }
 
