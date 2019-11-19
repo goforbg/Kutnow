@@ -65,24 +65,6 @@ public class ShopAdapter extends RecyclerView.Adapter <ShopAdapter.ViewHolder> {
         holder.tvShopName.setText(shops.get(position).getShopName());
         holder.tvShopDesc.setText(shops.get(position).getShopDesc());
 
-        /*
-        if (shops.get(position).getPrice().equals("cheap")) {
-            holder.ivPrice.setImageResource(R.drawable.ic_cheap);
-        }
-
-        if (shops.get(position).getPrice().equals("medium")) {
-            holder.ivPrice.setImageResource(R.drawable.ic_medium);
-        }
-
-        if (shops.get(position).getPrice().equals("costly")) {
-            holder.ivPrice.setImageResource(R.drawable.ic_costly);
-        }
-
-        if (shops.get(position).getShopName().equals("")) {
-            holder.ivPrice.setImageResource(R.drawable.ic_cheap);
-        }
-
-         */
 
         holder.ivShop.setImageResource(shopId[position]);
 
